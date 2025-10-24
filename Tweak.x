@@ -11,9 +11,12 @@
 #import <YouTubeHeader/YTMainAppVideoPlayerOverlayView.h>
 #import <YouTubeHeader/YTMainAppControlsOverlayView.h>
 #import <YouTubeHeader/YTPlayerViewController.h>
-#import <YouTubeHeader/YTBrowseViewController.h>
 
 #define TweakKey @"YouSubscriptions"
+
+@interface YTBrowseViewController : UIViewController
+- (instancetype)initWithCommand:(id)command;
+@end
 
 @interface YTMainAppVideoPlayerOverlayViewController (YouSubscriptions)
 @property (nonatomic, weak) YTPlayerViewController *parentViewController;
