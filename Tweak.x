@@ -31,11 +31,6 @@
 - (void)didPressYouSubscriptions;
 @end
 
-@interface YTMainAppControlsOverlayView (YouSubscriptions)
-@property (nonatomic, assign) YTPlayerViewController *playerViewController;
-- (void)didPressYouSubscriptions:(id)arg;
-@end
-
 @interface YTInlinePlayerBarController : NSObject
 @end
 
@@ -50,6 +45,10 @@
 
 @interface YTICommand : NSObject
 - (void)setBrowseEndpoint:(YTIBrowseEndpoint *)endpoint;
+@end
+
+@interface YTMainAppVideoPlayerOverlayView (YouSubscriptions)
+@property (nonatomic, weak, readwrite) YTMainAppVideoPlayerOverlayViewController *delegate;
 @end
 
 // For displaying snackbars - @theRealfoxster
