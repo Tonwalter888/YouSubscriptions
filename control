@@ -1,0 +1,9 @@
+Package: com.water888.yousubscriptions
+Name: YouSubscriptions
+Version: 1.1.0
+Architecture: iphoneos-arm64
+Description: Adds a Subscriptions button to YouTube video overlay
+Maintainer: Tonwalter888
+Author: Tonwalter888
+Section: Tweaks
+Depends: mobilesubstrate
