@@ -16,11 +16,12 @@
 #define TweakKey @"YouSubscriptions"
 
 @interface YTMainAppVideoPlayerOverlayViewController (YouSubscriptions)
-@property (nonatomic, assign) YTPlayerViewController *parentViewController;
+@property (nonatomic, weak) YTPlayerViewController *parentViewController;
 @end
 
-@interface YTMainAppVideoPlayerOverlayView (YouSubscriptions)
-@property (nonatomic, weak, readwrite) YTMainAppVideoPlayerOverlayViewController *delegate;
+@interface YTMainAppControlsOverlayView (YouSubscriptions)
+@property (nonatomic, weak) YTPlayerViewController *playerViewController;
+- (void)didPressYouSubscriptions:(id)arg;
 @end
 
 @interface YTPlayerViewController (YouSubscriptions)
@@ -40,6 +41,13 @@
 - (void)didPressYouSubscriptions:(id)arg;
 @end
 
+@interface YTIBrowseEndpoint : NSObject
+- (void)setBrowseId:(NSString *)browseId;
+@end
+
+@interface YTICommand : NSObject
+- (void)setBrowseEndpoint:(YTIBrowseEndpoint *)endpoint;
+@end
 
 // For displaying snackbars - @theRealfoxster
 @interface YTHUDMessage : NSObject
@@ -90,10 +98,11 @@ static UIImage *subscriptionsImage(NSString *qualityLabel) {
     subscriptionsVC.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds), 0, 0);
     subscriptionsVC.popoverPresentationController.permittedArrowDirections = 0;
     
-    if (UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad) {
-        subscriptionsVC.preferredContentSize = CGSizeMake(400, 600);
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+    subscriptionsVC.preferredContentSize = CGSizeMake(CGRectGetWidth(self.view.bounds) - 40,
+                                                     CGRectGetHeight(self.view.bounds) - 200);
     } else {
-        subscriptionsVC.preferredContentSize = CGSizeMake(CGRectGetWidth(self.view.bounds) - 40, CGRectGetHeight(self.view.bounds) - 200);
+    subscriptionsVC.preferredContentSize = CGSizeMake(400, 600);
     }
 
     [self presentViewController:subscriptionsVC animated:YES completion:nil];
